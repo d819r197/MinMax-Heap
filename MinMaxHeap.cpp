@@ -5,7 +5,7 @@
 
 //Constructor
 MinMaxHeap::MinMaxHeap() {
-  heap_arr = new int*[10];
+  heap_arr = new int*[100];
   heap_size = 0;
 }
 
@@ -96,10 +96,14 @@ bool MinMaxHeap::Delete(int value) {
 void MinMaxHeap::RecMinLevelElements(int rootIndex, int level) {
   if(heap_arr[rootIndex] != nullptr) {
     //Max Nodes
-    if(level % 2 == 1) {
-      std::cout <<", " << *heap_arr[rootIndex];
+    if(level % 2 == 0) {
+      std::cout << *heap_arr[rootIndex] <<", " ;
     }
+  }
+  if(heap_arr[getLeftChildOf(rootIndex)] != nullptr) {
     RecMinLevelElements(getLeftChildOf(rootIndex), level++);
+  }
+  if(heap_arr[getRightChildOf(rootIndex)] != nullptr) {
     RecMinLevelElements(getRightChildOf(rootIndex), level++);
   }
 }
@@ -110,7 +114,11 @@ void MinMaxHeap::RecMaxLevelElements(int rootIndex, int level) {
     if(level % 2 == 1) {
       std::cout << *heap_arr[rootIndex] <<", ";
     }
+  }
+  if(heap_arr[getLeftChildOf(rootIndex)] != nullptr) {
     RecMaxLevelElements(getLeftChildOf(rootIndex), level++);
+  }
+  if(heap_arr[getRightChildOf(rootIndex)] != nullptr) {
     RecMaxLevelElements(getRightChildOf(rootIndex), level++);
   }
 }
