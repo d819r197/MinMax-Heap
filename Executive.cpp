@@ -35,7 +35,9 @@ void Executive::run() {
     switch (menuInput()) {
       //Build Heap
       case 1: {
-
+        std::cout <<"Output: \n";
+        mmHeap.Build();
+        std::cout << std::endl;
         break;
       }
       //Insert
@@ -54,12 +56,12 @@ void Executive::run() {
         std::cin >> input;
         std::cout << std::endl;
         std::cout << "Output: ";
-        // if(mmHeap.Delete(input)) {
-        //   std::cout << "Deletion was successful.\n";
-        // }
-        // else {
-        //   std::cout << "Deletion failed. The value: " <<input <<" is not present in the tree.\n";
-        // }
+        if(mmHeap.Delete(input)) {
+          std::cout << "Deletion was successful.\n";
+        }
+        else {
+          std::cout << "Deletion failed. The value: " <<input <<" is not present in the tree.\n";
+        }
         break;
       }
       //MinLevelElements
@@ -78,6 +80,7 @@ void Executive::run() {
       }
       //Exit
       case 6: {
+        std::cout <<"Output: Bye!!!\n";
         quit = true;
         break;
       }
@@ -99,13 +102,14 @@ bool Executive::parseInputFile() {
     while(inputFile.get(c)) {
       if (c != ' ' && c != '\n') {
         input += c;
-        std::cout <<"current input: " <<input <<std::endl;
+        // std::cout <<"current input: " <<input <<std::endl;
       }
       else {
-        std::cout << "In loop, inserting: " <<input <<" into pq of size: " <<mmHeap.GetHeap_Size() <<std::endl;
+        // std::cout << "In loop, inserting: " <<input <<" into pq of size: " <<mmHeap.GetHeap_Size() <<std::endl;
         int strInt = std::stoi(input);
         int * value = new int(strInt);
         mmHeap.Insert(value);
+        // mmHeap.PrintHeap();
         input = "";
       }
     }
